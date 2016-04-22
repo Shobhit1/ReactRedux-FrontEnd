@@ -1,4 +1,4 @@
-import './FriendListApp.scss'
+import style from './style'
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
@@ -13,11 +13,16 @@ class FriendListApp extends Component {
     const { friendList: { friendsById }, actions } = this.props
 
     return (
-      <div className="friendListApp">
-        <h1>Da Bro's List</h1>
-        <AddFriendInput addFriend={actions.addFriend} />
-        <FriendList friends={friendsById} actions={actions} />
-      </div>
+      <section style={style.body}>
+        <div className="friendListApp" style={style.friendListApp}>
+          <div style={style.friendListAppHeading}>
+            <h1>Da Bro's List</h1>
+          </div>
+          <AddFriendInput addFriend={actions.addFriend} />
+          <FriendList friends={friendsById} actions={actions} />
+        </div>
+      </section>
+
     )
   }
 }
