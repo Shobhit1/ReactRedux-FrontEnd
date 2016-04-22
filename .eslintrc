@@ -1,0 +1,51 @@
+{
+  "parser": "babel-eslint",
+
+  "extends": "eslint:recommended",
+
+  "plugins": [
+    "react"
+  ],
+
+  "globals": {
+    define: true
+  },
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "jsx": true,
+    "modules": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true
+  },
+
+  "rules": {
+    "strict": [2, "global"],
+    "no-unused-vars": 0,
+    "no-console": 0,
+    "camelcase": [2, {"properties": "always"}],
+    "consistent-return": 2,
+    "arrow-spacing": 2,
+    "arrow-parens": [2, "always"],
+    "arrow-body-style": [2, "as-needed"],
+    "semi": [2, "never"],
+    "react/jsx-no-bind": [0],
+    "react/prefer-stateless-function" : [0],
+    "no-else-return": [0],
+    "no-unused-expressions": [2, { "allowShortCircuit": true }]
+  }
+}
