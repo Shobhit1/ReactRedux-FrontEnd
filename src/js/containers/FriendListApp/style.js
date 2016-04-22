@@ -16,7 +16,7 @@ export default {
     fontSize: '16px',
     lineHeight: '20px',
     marginBottom: '10px',
-    marginTop: '0',
+    marginTop: '0px',
     paddingLeft: '10px',
     fontFamily: 'Helvetica'
   }
