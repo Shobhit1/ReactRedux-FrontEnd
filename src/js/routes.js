@@ -11,7 +11,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Login} />
     <Route path="404" component={NotFoundView} />
-    <Route path="/home" component={productPage} />
+    {/*<Route path="/home" component={productPage} />*/}
     <Redirect from="*" to="404" />
   </Route>
 )

@@ -1,7 +1,8 @@
 import { AUTHENTICATE, CHECKING, LOGIN_SUCCESSFUL, LOGIN_FAILED } from '../constants/actions'
 import initialState from '../initialStates/login'
 
-const login = (state, action) => {
+
+const login = (state = initialState, action) => {
   switch (action.type) {
     case AUTHENTICATE:
       return Object.assign({}, state, { isAuthenticated: false, redirectTo: action.redirectTo })
