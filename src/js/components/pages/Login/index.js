@@ -8,9 +8,6 @@ import { authenticate } from '../../../redux/actions/loginActions'
 import styles from './style'
 
 class LoginView extends Component {
-  onSubmit(username, password) {
-    console.log(username, password)
-  }
   render() {
     let username
     let password
@@ -20,7 +17,7 @@ class LoginView extends Component {
           <form
             onSubmit={(event) => {
               event.preventDefault()
-              this.onSubmit(username.getValue(), password.getValue())
+              this.props.onSubmit(username.getValue(), password.getValue())
             }}
           >
             <div>
@@ -44,19 +41,25 @@ class LoginView extends Component {
     )
   }
 }
+LoginView.propTypes = {
+  onSubmit: React.PropTypes.func,
+  data: React.PropTypes.object
+}
 
 const mapStateToProps = (state) => {
-  return state.login
+  return {
+    data: state.login
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmit: (username, password) => {
       dispatch(authenticate({
-        username,
+        email: username,
         password
       }))
     }
   }
 }
-const Login = connect(mapStateToProps)(mapDispatchToProps)(LoginView)
+const Login = connect(mapStateToProps, mapDispatchToProps)(LoginView)
 export default Login
