@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { authenticate } from '../../../redux/actions/loginActions'
 
 import styles from './style'
 
-class Login extends Component {
+class LoginView extends Component {
   onSubmit(username, password) {
     console.log(username, password)
   }
@@ -16,17 +17,18 @@ class Login extends Component {
     return (
       <div>
         <Paper style={styles.paper}>
-          <form onSubmit={ (event) => {
-            event.preventDefault()
-            this.onSubmit(username.getValue(), password.getValue())
-          }}
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+              this.onSubmit(username.getValue(), password.getValue())
+            }}
           >
             <div>
-              <TextField ref={(node) => {username = node}} style={styles.field} floatingLabelText="Email" type="email" required="true" />
+              <TextField ref={(node) => { username = node }} style={styles.field} floatingLabelText="Email" type="email" required="true" />
             </div>
             <div>
               <TextField
-                ref={(node) => {password = node}}
+                ref={(node) => { password = node }}
                 style={styles.field}
                 floatingLabelText="Password"
                 type="password"
@@ -37,10 +39,24 @@ class Login extends Component {
               <RaisedButton label="Login" primary type="submit" disabled={false} style={styles.button} />
             </div>
           </form>
-      </Paper>
-    </div>
+        </Paper>
+      </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return state.login
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (username, password) => {
+      dispatch(authenticate({
+        username,
+        password
+      }))
+    }
+  }
+}
+const Login = connect(mapStateToProps)(mapDispatchToProps)(LoginView)
 export default Login

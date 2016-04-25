@@ -43,7 +43,7 @@
     "comma-dangle": ["error", "never"],
     "arrow-spacing": 2,
     "arrow-parens": [2, "always"],
-    "arrow-body-style": [2, "as-needed"],
+    "arrow-body-style": [0],
     "semi": [2, "never"],
     "react/jsx-no-bind": [0],
     "react/prefer-stateless-function" : [0],
