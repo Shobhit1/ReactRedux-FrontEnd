@@ -2,12 +2,13 @@ import React from 'react'
 import { Route, IndexRoute, Redirect } from 'react-router'
 
 import App from './components/App'
-import FriendListApp from './containers/FriendListApp/FriendListApp'
 import NotFoundView from './views/NotFoundView'
+
+import Login from './components/Login'
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={FriendListApp} />
+    <IndexRoute component={Login} />
     <Route path="404" component={NotFoundView} />
     <Redirect from="*" to="404" />
   </Route>
