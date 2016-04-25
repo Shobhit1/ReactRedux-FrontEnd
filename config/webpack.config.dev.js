@@ -29,7 +29,7 @@ const sassLoaders = [
 ]
 
 module.exports = {
-  env : process.env.NODE_ENV,
+  env: process.env.NODE_ENV,
   entry: {
     app: path.resolve(PATHS.app, 'main.js'),
     vendor: ['react']
@@ -69,7 +69,7 @@ module.exports = {
       }
     ]
   },
-  plugins: plugins,
+  plugins,
   postcss: function () {
     return [autoprefixer({
       browsers: ['last 2 versions']

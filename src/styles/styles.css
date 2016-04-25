@@ -23,6 +23,15 @@ a img{
   border: 0px;
 }
 
+
+/** To get rid of auto fill yellow background color on Chrome **/
+input:-webkit-autofill {
+  -moz-box-shadow: 0 0 0 1000px white inset;
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  box-shadow: 0 0 0 1000px white inset;
+}
+
+
 ::-moz-selection {
   background-color: #6ab344;
   color: #fff;

@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
 
-  "extends": "eslint:recommended",
+  "extends": "airbnb",
 
   "plugins": [
     "react"
@@ -37,8 +37,10 @@
     "strict": [2, "global"],
     "no-unused-vars": 0,
     "no-console": 0,
+    "max-len": [2, 150, 2],
     "camelcase": [2, {"properties": "always"}],
     "consistent-return": 2,
+    "comma-dangle": ["error", "never"],
     "arrow-spacing": 2,
     "arrow-parens": [2, "always"],
     "arrow-body-style": [2, "as-needed"],

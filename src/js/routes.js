@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, IndexRoute, Redirect } from 'react-router'
 
 import App from './components/App'
-import FriendListApp from './containers/FriendListApp/FriendListApp'
 import NotFoundView from './views/NotFoundView'
 
 import Login from './components/Login'

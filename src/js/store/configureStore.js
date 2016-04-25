@@ -1,15 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from '../reducers'
+import rootReducer from '../redux/reducers'
 import { persistState } from 'redux-devtools'
 
 export default function configureStore(initialState) {
-
   let enhancer
   const middleware = applyMiddleware()
 
   if (process.env.NODE_ENV !== 'production') {
-
-    let getDebugSessionKey = function () {
+    const getDebugSessionKey = () => {
       // By default we try to read the key from ?debug_session=<key> in the address bar
       const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/)
       return (matches && matches.length) ? matches[1] : null
@@ -38,6 +36,5 @@ export default function configureStore(initialState) {
       store.replaceReducer(require('../reducers').default)
     )
   }
-
   return store
 }
