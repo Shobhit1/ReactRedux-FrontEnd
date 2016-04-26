@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const xhr = axios.create()
 xhr.interceptors.request.use((config) => {
-  console.log("here2")
   const accessToken = 'hello'
   const headers = config.headers
   if (accessToken && headers) {

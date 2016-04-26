@@ -1,4 +1,4 @@
 export default {
   userData: {},
-  isLoggedIn: false
+  isAuthenticated: false
 }

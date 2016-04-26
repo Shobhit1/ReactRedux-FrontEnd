@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { authenticate } from '../../../redux/actions/loginActions'
-
+import { AUTHENTICATE } from '../../../redux/constants/actions'
 import styles from './style'
 
 class LoginView extends Component {
@@ -21,15 +21,21 @@ class LoginView extends Component {
             }}
           >
             <div>
-              <TextField ref={(node) => { username = node }} style={styles.field} floatingLabelText="Email" type="email" required="true" />
+              <TextField
+                ref={(node) => { username = node }}
+                style={styles.field}
+                floatingLabelText="Email"
+                required="true"
+                type="email"
+              />
             </div>
             <div>
               <TextField
                 ref={(node) => { password = node }}
                 style={styles.field}
                 floatingLabelText="Password"
-                type="password"
                 required="true"
+                type="password"
               />
             </div>
             <div style={styles.buttonWrapper}>

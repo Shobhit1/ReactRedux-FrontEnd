@@ -1,18 +1,24 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from '../redux/reducers'
+import DevTools from '../containers/DevTools'
 import thunk from 'redux-thunk'
-import { persistState } from 'redux-devtools'
 
-export default function configureStore(initialState) {
-  let enhancer
 
-  const store = createStore(rootReducer, applyMiddleware(thunk))
+const middleware = applyMiddleware(thunk)
 
-  // Enable Webpack hot module replacement for reducers
-  if (module.hot) {
-    module.hot.accept('../redux/reducers', () =>
-      store.replaceReducer(require('../redux/reducers').default)
-    )
-  }
-  return store
+const enhancer = compose(
+  // Middleware we want to use in development
+  middleware,
+  window.devToolsExtension ?
+    window.devToolsExtension() :
+    DevTools.instrument(),
+)
+const store = createStore(rootReducer, enhancer)
+// Enable Webpack hot module replacement for reducers
+if (module.hot) {
+  module.hot.accept('../redux/reducers', () =>
+    store.replaceReducer(rootReducer)
+  )
 }
+
+export default store

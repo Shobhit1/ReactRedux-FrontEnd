@@ -20,14 +20,14 @@ class App extends Component {
       }
     }
     return (
-    <MuiThemeProvider muiTheme={lightMuiTheme}>
-      <div>
-        <AppBar style={styles.toolbar} showMenuIconButton={false} titleStyle={{ flex: 'none' }} />
-        <section>
-          {this.props.children}
-        </section>
-      </div>
-    </MuiThemeProvider>
+      <MuiThemeProvider muiTheme={lightMuiTheme}>
+        <div>
+          <AppBar style={styles.toolbar} showMenuIconButton={false} titleStyle={{ flex: 'none' }} />
+          <section>
+            {this.props.children}
+          </section>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

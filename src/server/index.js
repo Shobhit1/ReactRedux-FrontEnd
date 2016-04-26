@@ -13,7 +13,6 @@ import yargs from 'yargs'
 const args = yargs.default('env', 'development').argv
 const app = express()
 const compiler = webpack(config(args.env || 'development'))
-console.log(config)
 
 app.use(session({
   name: 'SessionID',

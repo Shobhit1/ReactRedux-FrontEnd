@@ -1,7 +1,6 @@
 import { AUTHENTICATE, CHECKING, LOGIN_SUCCESSFUL, LOGIN_FAILED } from '../constants/actions'
 import initialState from '../initialStates/login'
 
-
 const login = (state = initialState, action) => {
   switch (action.type) {
     case AUTHENTICATE:
@@ -11,7 +10,7 @@ const login = (state = initialState, action) => {
     case LOGIN_SUCCESSFUL:
       return Object.assign({}, state, { isAuthenticated: true, userData: action.userData, attemptFailed: false })
     case LOGIN_FAILED:
-      return Object.assign({}, state, { isAuthenticated: false, attemptFailed: true, errorMessage: action.error.data.error_description })
+      return Object.assign({}, state, { isAuthenticated: false, attemptFailed: true, errorMessage: action.error })
     default:
       return state
   }

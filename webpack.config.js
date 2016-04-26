@@ -25,7 +25,9 @@ const webpackConfig = (env) => {
       new webpack.DefinePlugin({
         __DEVELOPMENT__: true,
         __DEVTOOLS__: true
-      })
+      }),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.NoErrorsPlugin()
     ],
     module: {
       loaders: [
