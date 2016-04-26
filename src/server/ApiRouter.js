@@ -7,25 +7,22 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 class ApiRouter {
   static login(req, res) {
     request.post({
-      url: 'localhost:3000/users/authenticate',
+      url: 'http://localhost:3000/users/authenticate',
       form: {
-        grant_type: 'password',
-        username: req.body.username,
+        grantType: 'password',
+        email: req.body.email,
         password: req.body.password
       },
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: 'Basic Y29iYWx0OmNvYmFsdHNlY3JldA=='
-      }
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' }
     }, (err, httpResponse, body) => {
       if (!err && httpResponse.statusCode === 200) {
         const jsonBody = JSON.parse(body)
-        const maxAge = jsonBody.expires_in * 1000
+        // const maxAge = jsonBody.expires_in * 1000
         const cookies = new Cookies(req, res)
-        cookies.set('access_token', jsonBody.access_token, { httpOnly: false, overwrite: true, maxAge })
+        cookies.set('token', jsonBody.token, { httpOnly: false, overwrite: true })
 
         /* eslint no-param-reassign: [0] */
-        req.session.cookie.maxAge = maxAge
+        // req.session.cookie.maxAge = maxAge
         req.session.user = body
 
         res.status(httpResponse.statusCode).setHeader('Content-Type', 'application/json; charset=UTF-8')

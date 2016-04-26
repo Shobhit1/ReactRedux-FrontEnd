@@ -18,7 +18,7 @@ export const loginFailed = (error) => {
 
 export const authenticate = (credentials) => {
   return (dispatch) => {
-    xhr.post('http://localhost:3000/users/authenticate', credentials, {
+    xhr.post('/login', credentials, {
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       responseType: 'json'
     }).then((response) => {
@@ -26,7 +26,7 @@ export const authenticate = (credentials) => {
       dispatch(goToPage('/home'))
     }).catch((error) => {
       dispatch(loginFailed(error))
-      dispatch(goToPage('/home'))
+      dispatch(goToPage('/'))
     })
   }
 }
