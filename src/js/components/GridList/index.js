@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
-import Subheader from 'material-ui/Subheader'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 
 const styles = {
@@ -11,75 +10,54 @@ const styles = {
     justifyContent: 'space-around'
   },
   gridList: {
-    width: 500,
+    width: '100%',
     height: 500,
     overflowY: 'auto',
-    marginBottom: 24
+    padding: '20px'
+  }
+}
+class GridListComp extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tileData: []
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.convertData(nextProps.data)
+  }
+  convertData(props) {
+    const arr = Object.keys(props).map((k) => this.createObject(props[k]))
+    this.setState({ tileData: arr.slice(3) })
+  }
+  createObject(product) {
+    return Object.assign({}, { img: product.pictures[0], title: product.name, category: product._category })
+  }
+  render() {
+    return (
+      <div style={styles.root}>
+        <GridList
+          cellHeight={200}
+          style={styles.gridList}
+          cols={4}
+        >
+          {this.state.tileData.map((tile) => (
+            <GridTile
+              key={tile.title}
+              title={tile.title}
+              subtitle={<span>Category: <b>{tile.category}</b></span>}
+            >
+              <img src={tile.img} alt="tile" />
+            </GridTile>
+          ))}
+        </GridList>
+      </div>
+    )
   }
 }
 
-const tilesData = [
-  {
-    img: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'Breakfast',
-    author: 'jill111'
-  },
-  {
-    img: 'images/grid-list/burger-827309_640.jpg',
-    title: 'Tasty burger',
-    author: 'pashminu'
-  },
-  {
-    img: 'images/grid-list/camera-813814_640.jpg',
-    title: 'Camera',
-    author: 'Danson67'
-  },
-  {
-    img: 'images/grid-list/morning-819362_640.jpg',
-    title: 'Morning',
-    author: 'fancycrave1'
-  },
-  {
-    img: 'images/grid-list/hats-829509_640.jpg',
-    title: 'Hats',
-    author: 'Hans'
-  },
-  {
-    img: 'images/grid-list/honey-823614_640.jpg',
-    title: 'Honey',
-    author: 'fancycravel'
-  },
-  {
-    img: 'images/grid-list/vegetables-790022_640.jpg',
-    title: 'Vegetables',
-    author: 'jill111'
-  },
-  {
-    img: 'images/grid-list/water-plant-821293_640.jpg',
-    title: 'Water plant',
-    author: 'BkrmadtyaKarki'
-  }
-]
+GridListComp.propTypes = {
+  data: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
+}
 
-const GridListExampleSimple = () => (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={200}
-      style={styles.gridList}
-    >
-      <Subheader>December</Subheader>
-      {tilesData.map((tile) => (
-        <GridTile
-          key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.author}</b></span>}
-          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-        >
-          <img src={tile.img} alt="tile" />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
-)
-
-export default GridListExampleSimple
+export default GridListComp

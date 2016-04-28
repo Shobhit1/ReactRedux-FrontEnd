@@ -1,9 +1,13 @@
 export default {
   slider: {
+    // padding: '20px',
+    width: '100%',
+    alignItems: 'stretch',
+    maxHeight: '500px'
+  },
+  image: {
+    maxHeight: '500px',
     maxWidth: '100%',
-    padding: '20px',
-    background: '#419be0',
-    maxHeight: '800px',
-    height: '500px'
+    height: 'auto'
   }
 }

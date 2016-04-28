@@ -20,10 +20,11 @@ class ProductsView extends Component {
               slidesToScroll: 1,
               arrows: true
             }}
+            data={this.props.data}
           />
         </div>
         <div>
-          <GridList />
+          <GridList data={this.props.data} />
         </div>
       </div>
     )
@@ -31,11 +32,13 @@ class ProductsView extends Component {
 }
 ProductsView.propTypes = {
   onSubmit: React.PropTypes.func,
-  data: React.PropTypes.object
+  data: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
+
 }
 
 const mapStateToProps = (state) => {
   return {
+    data: state.products.productData
   }
 }
 const mapDispatchToProps = (dispatch) => {

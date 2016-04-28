@@ -4,14 +4,19 @@ import Slider from 'react-slick'
 import styles from './style'
 
 class ReactSlider extends Component {
+  getObject() {
+    const arr = Object.keys(this.props.data).map((k) => this.renderDiv(this.props.data[k]))
+    return arr.slice(0, 3)
+  }
+  renderDiv(product) {
+    return <img key={product.name} style={styles.image} src={product.pictures[1]} alt="product" />
+  }
   render() {
     return (
       <div>
         <div style={styles.slider}>
           <Slider {...this.props.settings}>
-            <div style={{ height: '500px' }}><h3>6</h3></div>
-            <div style={{ height: '500px' }}><h3>3</h3></div>
-            <div style={{ height: '500px' }}><h3>1</h3></div>
+            {this.getObject()}
           </Slider>
         </div>
       </div>
@@ -20,6 +25,7 @@ class ReactSlider extends Component {
 }
 
 ReactSlider.propTypes = {
-  settings: React.PropTypes.object
+  settings: React.PropTypes.object,
+  data: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
 }
 export default ReactSlider

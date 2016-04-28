@@ -1,4 +1,13 @@
+import { PRODUCT_DATA_STORE } from '../constants/actions'
 import xhr from '../../../utils/xhr'
+
+export const productDataSuccessful = (productData) => {
+  return {
+    type: PRODUCT_DATA_STORE,
+    productData
+  }
+}
+
 
 export const loadAllProductsData = () => {
   return (dispatch) => {
@@ -6,9 +15,9 @@ export const loadAllProductsData = () => {
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       responseType: 'json'
     }).then((response) => {
-      console.log(response.data)
+      dispatch(productDataSuccessful(response.data))
     }).catch((error) => {
-      console.error(error)
+      throw error
     })
   }
 }

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import login from './login'
 import routingReducer from './routingReducer'
-import allProducts from './allProducts'
+import products from './products'
 
 const rootReducer = combineReducers({
   login,
   routingReducer,
-  allProducts
+  products
 })
 
 export default rootReducer
