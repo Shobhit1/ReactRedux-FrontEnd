@@ -5,4 +5,7 @@ node_modules/
 build/
 *.log*
 npm-debug.log
-api/
+public/index.html
+index2.html
+Readme2.md
+~
