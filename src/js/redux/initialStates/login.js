@@ -1,4 +1,8 @@
 export default {
   userData: {},
-  isAuthenticated: false
+  isAuthenticated: false,
+  registrationMode: false,
+  registrationFailed: false,
+  attemptFailed: false,
+  reviewData: []
 }

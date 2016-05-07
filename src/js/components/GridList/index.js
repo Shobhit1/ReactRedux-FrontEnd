@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
-import StarBorder from 'material-ui/svg-icons/toggle/star-border'
+// import AddToShoppingCart from 'material-ui/svg-icons/Action/3d_rotation'
+import { connect } from 'react-redux'
+import { getIndividualProduct } from '../../redux/actions/productsActions'
+import { goToPage } from '../../redux/actions/routingActions'
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
-  },
-  gridList: {
-    width: '100%',
-    height: 500,
-    overflowY: 'auto',
-    padding: '20px'
-  }
-}
-class GridListComp extends Component {
+import styles from './styles'
+
+class GridListCompView extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,29 +27,54 @@ class GridListComp extends Component {
   }
   render() {
     return (
-      <div style={styles.root}>
-        <GridList
-          cellHeight={200}
-          style={styles.gridList}
-          cols={4}
-        >
-          {this.state.tileData.map((tile) => (
-            <GridTile
-              key={tile.title}
-              title={tile.title}
-              subtitle={<span>Category: <b>{tile.category}</b></span>}
-            >
-              <img src={tile.img} alt="tile" />
-            </GridTile>
-          ))}
-        </GridList>
-      </div>
+      <GridList
+        cellHeight={200}
+        cols={4}
+      >
+        {this.state.tileData.map((tile) => (
+          <GridTile
+            key={tile.title}
+            title={tile.title.toUpperCase()}
+            subtitle={<span>Category: <b>{tile.category.toUpperCase()}</b></span>}
+            onClick={() => this.props.handleClick(tile.title)}
+            actionIcon={
+              <IconButton
+                onClick={() => this.props.handleClick(tile.title)}
+                iconClassName="fa fa-info-circle"
+                color="white"
+                iconStyle={styles.mediumIcon}
+                style={styles.mediumIconWrapper}
+                tooltip="More Information"
+                tooltipPosition="bottom-left"
+              />
+            }
+          >
+            <img src={tile.img} alt="tile" />
+          </GridTile>
+        ))}
+      </GridList>
     )
   }
 }
 
-GridListComp.propTypes = {
-  data: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
+GridListCompView.propTypes = {
+  data: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
+  handleClick: React.PropTypes.func
 }
+
+const mapStateToProps = (state) => {
+  return state
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleClick: (name) => {
+      dispatch(getIndividualProduct(name))
+    },
+    handleAddToCartClick: (name) => {
+      dispatch(getIndividualProduct(name))
+    }
+  }
+}
+const GridListComp = connect(mapStateToProps, mapDispatchToProps)(GridListCompView)
 
 export default GridListComp

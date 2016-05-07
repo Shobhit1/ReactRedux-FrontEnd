@@ -3,7 +3,6 @@ import rootReducer from '../redux/reducers'
 import DevTools from '../containers/DevTools'
 import thunk from 'redux-thunk'
 
-
 const middleware = applyMiddleware(thunk)
 
 const enhancer = compose(

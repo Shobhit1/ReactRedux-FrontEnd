@@ -1,18 +1,19 @@
 import path from 'path'
 import webpack from 'webpack'
+import WebpackHtmlGenerator from './buildHtml'
 
 const webpackConfig = (env) => {
   return {
-    devtool: 'eval',
-    entry: {
+    devtool: 'cheap-source-map',
+    entry: [
       // 'webpack-dev-server/client?http://localhost:3000',
       // 'webpack/hot/only-dev-server',
-      app: path.resolve(__dirname, './src/app.js'),
-      vendor: ['react']
-    },
+      'webpack-hot-middleware/client',
+      './src/app.js'
+    ],
     output: {
-      path: path.resolve(__dirname, './build'),
-      filename: 'js/[name].js',
+      path: path.join(__dirname, 'dist'),
+      filename: 'bundle-[hash].js',
       publicPath: '/'
     },
     resolve: {
@@ -27,7 +28,8 @@ const webpackConfig = (env) => {
         __DEVTOOLS__: true
       }),
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new WebpackHtmlGenerator()
     ],
     module: {
       loaders: [

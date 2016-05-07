@@ -1,3 +1,5 @@
 export default {
-  productData: {}
+  productData: {},
+  eachProduct: {},
+  snackBarDisplay: false
 }

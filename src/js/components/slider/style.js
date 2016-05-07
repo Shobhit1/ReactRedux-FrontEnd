@@ -1,13 +1,11 @@
 export default {
   slider: {
-    // padding: '20px',
     width: '100%',
-    alignItems: 'stretch',
-    maxHeight: '500px'
+    paddingBottom: '20px',
   },
   image: {
     maxHeight: '500px',
     maxWidth: '100%',
-    height: 'auto'
+    height: 'auto',
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "yard-portal",
+  "name": "Slick",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,7 @@
     "axios": "^0.9.1",
     "babel": "^6.5.2",
     "body-parser": "^1.15.0",
+    "compression": "1.6.1",
     "cookies": "^0.6.1",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
@@ -23,7 +24,7 @@
     "griddle-react": "^0.5.0",
     "loaders.css": "^0.1.2",
     "material-ui": "^0.15.0-beta.1",
-    "moment": "^2.12.0",
+    "moment": "2.13.0",
     "openpgp": "^2.1.0",
     "radium": "^0.16.6",
     "react": "^15.0.0",

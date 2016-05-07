@@ -1,9 +1,12 @@
 import axios from 'axios'
+import getAccessToken from './cookies'
+import store from '../js/store/configureStore'
+import { loginFailed, registrationFailed } from '../js/redux/actions/loginActions'
 
 const xhr = axios.create()
 xhr.interceptors.request.use((config) => {
-  const accessToken = document.cookie.split()[0].trim().split('=')[1]
   const headers = config.headers
+  const accessToken = getAccessToken() || '1234'
   if (accessToken && headers) {
     headers.Authorization = `Bearer ${accessToken}`
   }
@@ -15,7 +18,13 @@ xhr.interceptors.request.use((config) => {
 xhr.interceptors.response.use((response) => {
   return response
 }, (error) => {
-  return Promise.reject(error)
+  if (error.status === 401) {
+    const { dispatch } = store
+    dispatch(loginFailed(error))
+  } else if (error.status === 500) {
+    const { dispatch } = store
+    dispatch(registrationFailed(error))
+  }
 })
 
 export default xhr
