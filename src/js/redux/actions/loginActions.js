@@ -1,4 +1,4 @@
-import { AUTHENTICATE, LOGIN_SUCCESSFUL, LOGIN_FAILED, LOG_OUT, TOGGLE_REGISTRATION,
+import { LOGIN_SUCCESSFUL, LOGIN_FAILED, LOG_OUT, TOGGLE_REGISTRATION,
         REGISTRATION_FAILED, STORE_REVIEW_DATA } from '../constants/actions'
 import xhr from '../../../utils/xhr'
 import { goToPage } from './routingActions'
@@ -45,11 +45,9 @@ export const registrationFailedAction = (registrationFailed) => {
   }
 }
 
-export const registrationFailed = (error) => {
-  return (dispatch) => {
+export const registrationFailed = () => (
     registrationFailedAction(true)
-  }
-}
+)
 
 export const saveReviewData = (data) => {
   return {
@@ -71,44 +69,14 @@ export const getReviewData = (email) => {
   }
 }
 
-export const addReview = (data) => {
-  return (dispatch) => {
-    xhr.put('https://localhost:4443/reviews/edit', data, {
-      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-      responseType: 'json'
-    }).then((response) => {
-      dispatch(getReviewData(data.email))
-      dispatch(goToPage('/user'))
-    }).catch((error) => {
-      throw error
-    })
-  }
-}
-
-export const createUser = (data) => {
-  return (dispatch) => {
-    xhr.post('https://localhost:4443/users/register', data, {
-      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-      responseType: 'json'
-    }).then((response) => {
-      dispatch(toggleRegistrationMode(false))
-      dispatch(goToPage('/login'))
-    }).catch((error) => {
-      dispatch(registrationFailed(error))
-      // throw error
-    })
-  }
-}
 export const authenticate = (credentials) => {
   return (dispatch) => {
-    xhr.post('/login', credentials, {
+    xhr.get('/auth/github', credentials, {
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       responseType: 'json'
     }).then((response) => {
-      dispatch(loginSuccessful(response.data))
-      dispatch(goToPage('/home'))
-    }).catch((error) => {
-      dispatch(loginFailed())
+      console.log(response)
+    }).catch(() => {
       dispatch(goToPage('/login'))
     })
   }

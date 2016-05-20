@@ -43,6 +43,10 @@ const webpackConfig = (env) => {
           loaders: ['style', 'css', 'cssnext']
         },
         {
+          include: /\.json$/,
+          loaders: ['json-loader']
+        },
+        {
           test: /\.(png|jpg)$/,
           loader: 'url-loader?limit=32768'
         },

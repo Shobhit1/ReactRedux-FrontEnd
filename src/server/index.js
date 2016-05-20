@@ -13,10 +13,16 @@ import fs from 'fs'
 import http from 'http'
 import https from 'https'
 import compression from 'compression'
+import passport from 'passport'
+import { Strategy } from 'passport-github'
+
 
 const args = yargs.default('env', 'development').argv
 const app = express()
 const compiler = webpack(config(args.env || 'development'))
+
+const GITHUB_CLIENT_ID = 'c318c73d6e511c50da50'
+const GITHUB_CLIENT_SECRET = 'cea0e92d9deca84ec66272d87d6d8366eba0f9f1'
 
 app.use(session({
   name: 'SessionID',
@@ -40,16 +46,35 @@ app.use((req, res, next) => {
 })
 
 
-app.post('/login', ApiRouter.login)
 
-// redirect all http requests to https
-// app.all('*', (req, res, next) => {
-//   if (req.secure) {
-//     console.log(req)
-//     return next()
-//   }
-//   res.redirect(`https://'${req.hostname}:${process.env.HTTPS_PORT}${req.url}`)
-// })
+passport.use(new Strategy({
+  clientID: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3030/'
+},
+(accessToken, refreshToken, profile, done) => {
+  // asynchronous verification, for effect...
+  process.nextTick(() => {
+    // To keep the example simple, the user's GitHub profile is returned to
+    // represent the logged-in user.  In a typical application, you would want
+    // to associate the GitHub account with a user record in your database,
+    // and return that user instead.
+    return done(null, profile)
+  })
+}
+))
+
+app.get('/auth/github', passport.authenticate('github'))
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] }),
+  function(req, res){
+  // The request will be redirected to GitHub for authentication, so this
+  // function will not be called.
+  })
+
+
+app.post('/login', ApiRouter.login)
 
 app.get('*', (request, response) => {
   response.sendFile(path.resolve('public', 'index.html'))

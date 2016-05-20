@@ -1,7 +1,6 @@
 import request from 'request'
 import Cookies from 'cookies'
 
-// TODO: Disable this once proper MWS server certificates are in place
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 class ApiRouter {
@@ -28,7 +27,6 @@ class ApiRouter {
         return res.send(body)
         /* eslint no-else-return: [0]*/
       } else {
-        const jsonBody = JSON.parse(body)
         const temp = {
           data: {
             success: false,
