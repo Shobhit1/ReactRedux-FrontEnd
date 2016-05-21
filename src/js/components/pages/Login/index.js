@@ -5,6 +5,9 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { authenticate } from '../../../redux/actions/loginActions'
 
+// material ui theme
+import { OAuthSignInButton } from 'redux-auth'
+
 import styles from './style'
 
 class LoginView extends Component {
@@ -44,10 +47,23 @@ class LoginView extends Component {
       </Paper>
     )
   }
+  renderOAuthButton() {
+  // or using custom label text
+    return (
+      <Paper style={styles.paper} zdepth={1}>
+        <OAuthSignInButton
+          provider="github"
+          endpoint="c318c73d6e511c50da50"
+        >
+          Github
+        </OAuthSignInButton>
+      </Paper>
+    )
+  }
   render() {
     return (
       <div className="grid grid-pad">
-        {this.renderLoginForm()}
+        {this.renderOAuthButton()}
       </div>
     )
   }

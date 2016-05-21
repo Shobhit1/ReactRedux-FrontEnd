@@ -45,12 +45,10 @@ app.use((req, res, next) => {
   next()
 })
 
-
-
 passport.use(new Strategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3030/'
+  callbackURL: ''
 },
 (accessToken, refreshToken, profile, done) => {
   // asynchronous verification, for effect...
@@ -66,13 +64,25 @@ passport.use(new Strategy({
 
 app.get('/auth/github', passport.authenticate('github'))
 
+
+app.get('/auth/github/callback', () => {
+  passport.authenticate('github', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth/github'
+  })
+})
+
 app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
-  function(req, res){
+  (req, res) => {  //eslint-disable-line
   // The request will be redirected to GitHub for authentication, so this
   // function will not be called.
   })
 
+app.get('/logout', (req, res) => {
+  // req.logout()
+  res.redirect('/login')
+})
 
 app.post('/login', ApiRouter.login)
 
@@ -87,7 +97,7 @@ const credentials = {
 app.set('port', process.env.HTTPS_PORT)
 
 const httpServer = http.createServer(app)
-httpServer.listen(process.env.HTTP_PORT, () => console.log(`Listening on port ${process.env.HTTP_PORT}`))
+httpServer.listen(process.env.HTTP_PORT, () => console.log(`Listening on port ${process.env.HTTP_PORT}`)) //eslint-disable-line
 
 const httpsServer = https.createServer(credentials, app)
-httpsServer.listen(process.env.HTTPS_PORT, () => console.log(`Listening on port ${process.env.HTTPS_PORT} for SECURED`))
+httpsServer.listen(process.env.HTTPS_PORT, () => console.log(`Listening on port ${process.env.HTTPS_PORT} for SECURED`)) //eslint-disable-line

@@ -3,6 +3,7 @@ import { LOGIN_SUCCESSFUL, LOGIN_FAILED, LOG_OUT, TOGGLE_REGISTRATION,
 import xhr from '../../../utils/xhr'
 import { goToPage } from './routingActions'
 import { clearCookie } from '../../../utils/cookies'
+import popup from '../../../utils/popup'
 
 export const loginSuccessful = (userData) => {
   return {
@@ -75,7 +76,7 @@ export const authenticate = (credentials) => {
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       responseType: 'json'
     }).then((response) => {
-      console.log(response)
+      popup('www.github.com', 'github', response.data)
     }).catch(() => {
       dispatch(goToPage('/login'))
     })
